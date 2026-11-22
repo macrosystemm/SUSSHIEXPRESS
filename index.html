@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<!-- =====================================================================
+     LANZADOR DE LA APP POS
+     Muestra tu app de Google Apps Script a pantalla completa, SIN el aviso
+     "Esta aplicación la ha creado un usuario de Google Apps Script".
+
+     ÚNICO PASO: pega abajo, entre las comillas, la URL de tu app
+     (la que termina en /exec) y cambia el nombre del negocio.
+     ===================================================================== -->
+<script>
+  const APP_URL = 'https://script.google.com/macros/s/AKfycbxdZnl8dELvmd8iYLxfiqnKk1fjepSZlpOFGxdXW1AOxaRt-W_ofmrvY3Nhr2ohK_V8zQ/exec';
+  const NOMBRE  = 'SUSHIEXPRESS';
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>POS</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍹</text></svg>">
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  .aviso { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; color: #fff;
+           font: 16px/1.5 system-ui, sans-serif; text-align: center; }
+  .aviso b { color: #facc15; }
+</style>
+</head>
+<body>
+<script>
+  document.title = NOMBRE;
+  if (!/^https:\/\/script\.google\.com\/.+\/exec$/.test(APP_URL)) {
+    document.body.innerHTML = '<div class="aviso"><div>Falta configurar el lanzador.<br>Abre este archivo y pega en <b>APP_URL</b> la URL de tu app que termina en <b>/exec</b>.</div></div>';
+  } else {
+    const f = document.createElement('iframe');
+    // pasa los parámetros (por ejemplo ?menu=1 para la carta del QR)
+    f.src = APP_URL + location.search;
+    f.allow = 'autoplay; clipboard-read; clipboard-write; fullscreen; camera';
+    f.title = NOMBRE;
+    document.body.appendChild(f);
+  }
+</script>
+</body>
+</html>
